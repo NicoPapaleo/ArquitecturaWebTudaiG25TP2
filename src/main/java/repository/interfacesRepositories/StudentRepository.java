@@ -1,4 +1,6 @@
 package repository.interfacesRepositories;
 
-public interface StudentRepository {
+import entity.Student;
+
+public interface StudentRepository extends CrudRepository <Student,Integer>{
 }

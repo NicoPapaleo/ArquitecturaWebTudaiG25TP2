@@ -1,4 +1,6 @@
 package repository.interfacesRepositories;
 
-public interface CityRepository {
+import entity.City;
+
+public interface CityRepository extends CrudRepository <City,Integer> {
 }

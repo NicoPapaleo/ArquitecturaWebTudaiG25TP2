@@ -1,4 +1,6 @@
 package repository.interfacesRepositories;
 
-public interface CareerRepository {
+import entity.Career;
+
+public interface CareerRepository extends CrudRepository <Career,Integer>{
 }
