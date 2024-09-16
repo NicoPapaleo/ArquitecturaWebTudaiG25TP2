@@ -6,6 +6,7 @@ import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import java.util.ArrayList;
 import java.util.List;
+import javax.persistence.*;
 
 @Entity
 public class Student {
@@ -16,16 +17,21 @@ public class Student {
     private int dni;
     @Column(name="Nombre")
     private String name;
+
     @Column(name="Apellido")
     private String lastName;
-    @Column
+
+    @Column(name="Edad")
     private int years;
-    @Column
+
+    @Column(name="Genero")
     private char gender;
 
-    //private List<Career>careers;
     @ManyToOne
     private City city;
+
+    @OneToMany(mappedBy = "student")
+    private List<Courses> courses;  // muestro todas las carreras que cursa el estudiante
 
     public Student(){}
 
@@ -37,7 +43,6 @@ public class Student {
         this.years = years;
         this.gender = gender;
         this.city = city;
-        //this.careers= new ArrayList<>();
     }
 
     public int getIdLibreta(){
@@ -63,24 +68,24 @@ public class Student {
         return gender;
     }
 
-    //public List<Career> getCareers() {
-    //    return careers;
-    //}
-
     public City getCity() {
         return city;
+    }
+
+    public List<Courses> getCourses() {
+        return courses;
     }
 
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + id +
+                "id=" + idLibreta +
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", years=" + years +
                 ", gender=" + gender +
-                //", careers=" + careers +
                 ", city=" + city +
+                ", cursa=" + courses +
                 '}';
     }
 }
