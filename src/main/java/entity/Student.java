@@ -11,7 +11,9 @@ import java.util.List;
 public class Student {
 
     @Id
-    private int id;
+    private int idLibreta;
+    @Column(name="DNI")
+    private int dni;
     @Column(name="Nombre")
     private String name;
     @Column(name="Apellido")
@@ -27,8 +29,9 @@ public class Student {
 
     public Student(){}
 
-    public Student(int id, String name, String lastName, int years, char gender, City city) {
-        this.id=id;
+    public Student(int idLibreta,int dni, String name, String lastName, int years, char gender, City city) {
+        this.idLibreta=idLibreta;
+        this.dni=dni;
         this.name = name;
         this.lastName = lastName;
         this.years = years;
@@ -37,8 +40,12 @@ public class Student {
         //this.careers= new ArrayList<>();
     }
 
-    public int getId(){
-        return id;
+    public int getIdLibreta(){
+        return idLibreta;
+    }
+
+    public int getDni(){
+        return dni;
     }
     public String getName() {
         return name;

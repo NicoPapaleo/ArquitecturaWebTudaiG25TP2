@@ -21,8 +21,8 @@ public class App
         City c1 = new City("Olavarria");
         em.persist(c);
         em.persist(c1);
-        Student s = new Student(1,"Francisco","Vazquez",33,'M',c);
-        Student s1 = new Student(2,"Mauro","Caciato",33,'M',c1);
+        Student s = new Student(1,35418649,"Francisco","Vazquez",33,'M',c);
+        Student s1 = new Student(2, 4952143,"Mauro","Caciato",33,'M',c1);
         em.persist(s);
         em.persist(s1);
         em.getTransaction().commit();
