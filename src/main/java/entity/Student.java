@@ -30,7 +30,7 @@ public class Student {
     @ManyToOne
     private City city;
 
-    @OneToMany(mappedBy = "student")
+    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
     private List<Courses> courses;  // muestro todas las carreras que cursa el estudiante
 
     public Student(){}

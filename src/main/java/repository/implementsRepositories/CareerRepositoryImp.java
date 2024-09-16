@@ -2,37 +2,22 @@ package repository.implementsRepositories;
 
 import entity.Career;
 import repository.helper.EntityManagerHelper;
-
-import java.sql.SQLException;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
-public class CareerRepositoryImp implements CrudRepository<Career, Integer> {
+public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
 
-    @Override
-    public void insert(Career career) throws SQLException {
-        EntityManagerHelper.getEntityManager();
+    public CareerRepositoryImp(Class<Career> careerClass, Class<Integer> integerClass) {
+        super(careerClass, integerClass);
     }
 
     @Override
-    public boolean delete(Integer integer) throws SQLException {
-        EntityManagerHelper.getEntityManager();
-        return false;
-    }
-
-    @Override
-    public List<Career> selectAll() throws SQLException {
-        EntityManagerHelper.getEntityManager();
-        return null;//List.of();
-    }
-
-    @Override
-    public boolean update() throws SQLException {
-        EntityManagerHelper.getEntityManager();
-        return false;
-    }
-
-    @Override
-    public Career select(Integer integer) throws SQLException {
-        return null;
+    public List<Career> findAll() {
+        String jpql = "SELECT c FROM Career c";
+        EntityManager em = EntityManagerHelper.getEntityManager();
+        Query query = em.createQuery(jpql);
+        List<Career> lc = query.getResultList();
+        return lc;
     }
 }

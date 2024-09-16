@@ -3,37 +3,31 @@ package repository.implementsRepositories;
 import entity.Student;
 import repository.helper.EntityManagerHelper;
 
-import java.sql.SQLException;
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 import java.util.List;
 
-public class StudentRepositoryImp implements CrudRepository<Student, Integer> {
+public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
 
-    @Override
-    public void insert(Student student) throws SQLException {
-        EntityManagerHelper.getEntityManager();
+    private static StudentRepositoryImp studentRepositoryImp;
+
+    public StudentRepositoryImp() {
+        super(Student.class, Integer.class);
+    }
+
+    public static StudentRepositoryImp getInstance() {
+        if (studentRepositoryImp == null) {
+            studentRepositoryImp = new StudentRepositoryImp();
+        }
+        return studentRepositoryImp;
     }
 
     @Override
-    public boolean delete(Integer integer) throws SQLException {
-        EntityManagerHelper.getEntityManager();
-        return false;
-    }
-
-    @Override
-    public List<Student> selectAll() throws SQLException {
-        EntityManagerHelper.getEntityManager();
-        return null;// List.of();
-    }
-
-    @Override
-    public boolean update() throws SQLException {
-        EntityManagerHelper.getEntityManager();
-        return false;
-    }
-
-    @Override
-    public Student select(Integer integer) throws SQLException {
-        EntityManagerHelper.getEntityManager();
-        return null;
+    public List<Student> findAll() {
+        String jpql = "SELECT s FROM Student s";
+        EntityManager em = EntityManagerHelper.getEntityManager();
+        Query query = em.createQuery(jpql);
+        List<Student> ls = query.getResultList();
+        return ls;
     }
 }

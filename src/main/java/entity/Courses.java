@@ -1,10 +1,11 @@
 package entity;
 
+import java.io.Serializable;
 import java.util.Date;
 import javax.persistence.*;
 
 @Entity
-public class Courses {
+public class Courses implements Serializable {
     @Id
     @ManyToOne
     @JoinColumn(name = "id_libreta")

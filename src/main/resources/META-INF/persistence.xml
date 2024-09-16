@@ -8,8 +8,8 @@
 
         <class>entity.Career</class>
         <class>entity.City</class>
-        <!--<class>entity.Courses</class>
-        <class>entity.Student</class>-->
+        <class>entity.Courses</class>
+        <class>entity.Student</class>
 
         <properties>
             <property name="javax.persistence.jdbc.driver" value="com.mysql.cj.jdbc.Driver" />
