@@ -2,12 +2,11 @@ package repository.implementsRepositories;
 
 import entity.City;
 import repository.helper.EntityManagerHelper;
-import repository.interfacesRepositories.CityRepository;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class CityRepositoryImp implements CityRepository {
+public class CityRepositoryImp extends BaseJPARepository<City, Integer> {
 
     @Override
     public void insert(City city) throws SQLException {

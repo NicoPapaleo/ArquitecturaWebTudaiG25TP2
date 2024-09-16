@@ -5,19 +5,18 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class EntityManagerHelper {
-    private static EntityManager entityManager;
+
     private static EntityManagerFactory emf;
 
     public static EntityManager getEntityManager() {
-        if(entityManager == null){
+        if(emf == null){
             emf = Persistence.createEntityManagerFactory("my_persistence_unit");
-            entityManager = emf.createEntityManager();
         }
-        return entityManager;
+        return emf.createEntityManager();
     }
 
     public static void closeEntityManagerFactory(){
-        if(entityManager!= null){
+        if(emf!=null){
             emf.close();
         }
     }

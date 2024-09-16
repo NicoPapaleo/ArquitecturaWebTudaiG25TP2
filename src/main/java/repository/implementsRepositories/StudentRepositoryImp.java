@@ -2,12 +2,11 @@ package repository.implementsRepositories;
 
 import entity.Student;
 import repository.helper.EntityManagerHelper;
-import repository.interfacesRepositories.StudentRepository;
 
 import java.sql.SQLException;
 import java.util.List;
 
-public class StudentRepositoryImp implements StudentRepository {
+public class StudentRepositoryImp implements CrudRepository<Student, Integer> {
 
     @Override
     public void insert(Student student) throws SQLException {

@@ -2,11 +2,11 @@ package repository.implementsRepositories;
 
 import entity.Career;
 import repository.helper.EntityManagerHelper;
-import repository.interfacesRepositories.CareerRepository;
+
 import java.sql.SQLException;
 import java.util.List;
 
-public class CareerRepositoryImp implements CareerRepository {
+public class CareerRepositoryImp implements CrudRepository<Career, Integer> {
 
     @Override
     public void insert(Career career) throws SQLException {
