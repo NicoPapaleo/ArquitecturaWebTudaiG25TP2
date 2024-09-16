@@ -22,7 +22,7 @@ public class CareerRepositoryImp implements CareerRepository {
     @Override
     public List<Career> selectAll() throws SQLException {
         EntityManagerHelper.getEntityManager();
-        return List.of();
+        return null;//List.of();
     }
 
     @Override

@@ -23,7 +23,7 @@ public class StudentRepositoryImp implements StudentRepository {
     @Override
     public List<Student> selectAll() throws SQLException {
         EntityManagerHelper.getEntityManager();
-        return List.of();
+        return null;// List.of();
     }
 
     @Override

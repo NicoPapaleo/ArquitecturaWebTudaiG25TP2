@@ -23,7 +23,7 @@ public class CityRepositoryImp implements CityRepository {
     @Override
     public List<City> selectAll() throws SQLException {
         EntityManagerHelper.getEntityManager();
-        return List.of();
+        return null;//List.of();
     }
 
     @Override
