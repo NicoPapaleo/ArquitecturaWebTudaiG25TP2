@@ -4,8 +4,9 @@ import javax.persistence.*;
 
 @Entity
 public class City {
+
     @Id
-    @GeneratedValue(strategy= GenerationType.AUTO)
+    //@GeneratedValue(strategy= GenerationType.AUTO)
     private int idCity;
 
     @Column
@@ -14,7 +15,8 @@ public class City {
     public City() {
     }
 
-    public City(String name) {
+    public City(int idCity, String name) {
+        this.idCity=idCity;
         this.name = name;
     }
 

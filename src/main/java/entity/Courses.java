@@ -8,11 +8,11 @@ import javax.persistence.*;
 public class Courses implements Serializable {
     @Id
     @ManyToOne
-    @JoinColumn(name = "id_libreta")
+    @JoinColumn(name = "id_Student")
     private Student student;
-
+    @Id
     @ManyToOne
-    @JoinColumn(name = "id_carrera")
+    @JoinColumn(name = "id_Career")
     private Career career;
 
     @Temporal(TemporalType.DATE)

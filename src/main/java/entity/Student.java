@@ -12,9 +12,12 @@ import javax.persistence.*;
 public class Student {
 
     @Id
-    private int idLibreta;
     @Column(name="DNI")
     private int dni;
+
+    @Column(name="idLibreta")
+    private int idLibreta;
+
     @Column(name="Nombre")
     private String name;
 
@@ -35,14 +38,15 @@ public class Student {
 
     public Student(){}
 
-    public Student(int idLibreta,int dni, String name, String lastName, int years, char gender, City city) {
-        this.idLibreta=idLibreta;
+    public Student(int dni,int idLibreta, String name, String lastName, int years, char gender ,City city) {
         this.dni=dni;
+        this.idLibreta=idLibreta;
         this.name = name;
         this.lastName = lastName;
         this.years = years;
         this.gender = gender;
         this.city = city;
+        this.courses=new ArrayList<>();
     }
 
     public int getIdLibreta(){
@@ -52,6 +56,7 @@ public class Student {
     public int getDni(){
         return dni;
     }
+
     public String getName() {
         return name;
     }
@@ -76,16 +81,21 @@ public class Student {
         return courses;
     }
 
+    public void addCourses(Courses courses){
+        this.courses.add(courses);
+    }
+
     @Override
     public String toString() {
         return "Student{" +
-                "id=" + idLibreta +
+                "dni=" + dni +
+                ", idLibreta=" + idLibreta +
                 ", name='" + name + '\'' +
                 ", lastName='" + lastName + '\'' +
                 ", years=" + years +
                 ", gender=" + gender +
                 ", city=" + city +
-                ", cursa=" + courses +
+                ", courses=" + courses +
                 '}';
     }
 }

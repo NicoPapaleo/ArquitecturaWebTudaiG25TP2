@@ -1,13 +1,14 @@
 package entity;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
 
 @Entity
 public class Career {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    //@GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int idCareer;
 
     @Column(name = "Nombre")
     private String name;
@@ -17,12 +18,14 @@ public class Career {
 
     public Career() {}
 
-    public Career(String name) {
+    public Career(int idCareer,String name) {
+        this.idCareer=idCareer;
         this.name = name;
+        this.students=new ArrayList<>();
     }
 
     public int getId() {
-        return id;
+        return idCareer;
     }
 
     public String getName() {
@@ -33,10 +36,14 @@ public class Career {
         return students;
     }
 
+    public void addCourses(Courses course){
+        students.add(course);
+    }
+
     @Override
     public String toString() {
         return "Career{" +
-                "id=" + id +
+                "id=" + idCareer +
                 ", name='" + name + '\'' +
                 ", students=" + students +
                 '}';

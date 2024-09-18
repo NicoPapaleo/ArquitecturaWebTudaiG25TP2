@@ -1,10 +1,12 @@
 package repository.implementsRepositories;
 
 import entity.City;
+import entity.Student;
 import repository.helper.EntityManagerHelper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CityRepositoryImp extends BaseJPARepository<City, Integer> {
@@ -26,8 +28,16 @@ public class CityRepositoryImp extends BaseJPARepository<City, Integer> {
     public List<City> findAll() {
         String jpql = "SELECT c FROM City c";
         EntityManager em = EntityManagerHelper.getEntityManager();
-        Query query = em.createQuery(jpql);
-        List<City> lc = query.getResultList();
-        return lc;
+        List<City>ls=new ArrayList<>();
+        try{
+            Query query = em.createQuery(jpql);
+            ls = query.getResultList();
+        }catch(Exception e){
+            throw new RuntimeException("Error en la consulta"+e);
+        }
+        finally{
+            em.close();
+        }
+        return ls;
     }
 }

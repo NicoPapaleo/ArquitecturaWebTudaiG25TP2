@@ -5,6 +5,7 @@ import repository.helper.EntityManagerHelper;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.util.ArrayList;
 import java.util.List;
 
 public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
@@ -26,8 +27,18 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
     public List<Student> findAll() {
         String jpql = "SELECT s FROM Student s";
         EntityManager em = EntityManagerHelper.getEntityManager();
-        Query query = em.createQuery(jpql);
-        List<Student> ls = query.getResultList();
+        List<Student>ls=new ArrayList<>();
+        try{
+            Query query = em.createQuery(jpql);
+            ls = query.getResultList();
+        }catch(Exception e){
+            throw new RuntimeException("Error en la consulta"+e);
+        }
+        finally{
+            em.close();
+        }
         return ls;
     }
+
+
 }
