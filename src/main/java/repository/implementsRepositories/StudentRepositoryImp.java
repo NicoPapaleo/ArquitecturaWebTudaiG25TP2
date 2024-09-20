@@ -42,9 +42,9 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
     }
 
     public List<StudentDTO> findStudentsByGender(char gender) {
+        EntityManager em = EntityManagerHelper.getEntityManager();
         String jpql = "SELECT new dto.StudentDTO(s.dni, s.idLibreta, s.name, s.lastName, s.gender, s.city.name, s.years) " +
                         "FROM Student s WHERE s.gender = :gender";
-        EntityManager em = EntityManagerHelper.getEntityManager();
         List<StudentDTO>ls=new ArrayList<>();
         try{
             Query query = em.createQuery(jpql);
