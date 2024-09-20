@@ -1,7 +1,5 @@
 package dto;
 
-import java.util.List;
-
 public class StudentDTO {
 
     private int dni;
@@ -10,16 +8,16 @@ public class StudentDTO {
     private String lastName;
     private char gender;
     private String city;
-    private int edad;
+    private int years;
 
-    public StudentDTO(int dni, int idLibreta, String name, String lastName, char gender, String city, int edad) {
+    public StudentDTO(int dni, int idLibreta, String name, String lastName, char gender, String city, int years) {
         this.dni = dni;
         this.idLibreta = idLibreta;
         this.name = name;
         this.lastName = lastName;
         this.gender = gender;
         this.city = city;
-        this.edad = edad;
+        this.years = years;
     }
 
 
@@ -71,11 +69,11 @@ public class StudentDTO {
         this.city = city;
     }
 
-    public int getEdad() {
-        return edad;
+    public int getYears() {
+        return years;
     }
 
-    public void setEdad(int edad) {
-        this.edad = edad;
+    public void setYears(int edad) {
+        this.years = edad;
     }
 }

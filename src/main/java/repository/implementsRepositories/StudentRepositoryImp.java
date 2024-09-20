@@ -42,7 +42,20 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
     }
 
     public List<StudentDTO> findStudentsByGender(char gender) {
-        String jpql = "SELECT new ";
+        String jpql = "SELECT new dto.StudentDTO(s.dni, s.idLibreta, s.name, s.lastName, s.gender, s.city.name, s.years) " +
+                        "FROM Student s WHERE s.gender = :gender";
+        EntityManager em = EntityManagerHelper.getEntityManager();
+        List<StudentDTO>ls=new ArrayList<>();
+        try{
+            Query query = em.createQuery(jpql);
+            query.setParameter("gender", gender);
+            ls = query.getResultList();
+        } catch(Exception e){
+            throw new RuntimeException("Error en la consulta"+e);
+        } finally {
+            em.close();
+        }
+        return ls;
     }
 
 
