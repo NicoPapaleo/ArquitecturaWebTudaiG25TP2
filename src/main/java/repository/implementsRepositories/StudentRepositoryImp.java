@@ -5,6 +5,7 @@ import entity.Student;
 import repository.helper.EntityManagerHelper;
 
 import javax.persistence.EntityManager;
+import javax.persistence.NoResultException;
 import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
@@ -24,13 +25,17 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         return studentRepositoryImp;
     }
 
+
+    /**
+     * @Brief Solicitar lista de todos los estudiantes.
+     * @return Lista de estudiantes de tipo List.
+     */
     @Override
     public List<Student> findAll() {
-        String jpql = "SELECT s FROM Student s";
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<Student>ls=new ArrayList<>();
         try{
-            Query query = em.createQuery(jpql);
+            Query query = em.createQuery(Student.BUSCAR_TODOS);
             ls = query.getResultList();
         }catch(Exception e){
             throw new RuntimeException("Error en la consulta"+e);
@@ -56,5 +61,43 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         return studentDTOlist;
     }
 
+    /**
+     * @brief busca estudiantes por genero
+     * @param gender es un caracter indicando el genero del estudiante
+     * @return retorna una lista de estudiantes
+     */
+
+    public List<StudentDTO> findStudentsByGender(char gender) {
+        EntityManager em = EntityManagerHelper.getEntityManager();
+
+        List<StudentDTO>ls=new ArrayList<>();
+        try{
+            Query query = em.createQuery(Student.BUSCAR_POR_GENERO);
+            query.setParameter("gender", gender);
+            ls = query.getResultList();
+        } catch(Exception e){
+            throw new RuntimeException("Error en la consulta"+e);
+        } finally {
+            em.close();
+        }
+        return ls;
+    }
+
+    /**
+     * @brief d) recuperar un estudiante, en base a su número de libreta universitaria.
+     * @param idLibreta Numero de libreta del estudiante a solicitar.
+     * @return Retorna un DTO de Estudiante.
+     */
+    public StudentDTO studentByRecord(int idLibreta){
+        EntityManager em = EntityManagerHelper.getEntityManager();
+        try {
+            Student result = (Student) em.createQuery(Student.BUSCAR_POR_LIBRETA)
+                                         .setParameter("libreta", idLibreta).getSingleResult();
+        } catch (NoResultException e){
+            System.out.println("No existe la libreta ingresada");
+            return null;
+        }
+        return new StudentDTO();
+    }
 
 }
