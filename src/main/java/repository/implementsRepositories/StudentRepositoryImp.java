@@ -52,7 +52,8 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
     public StudentDTO studentByRecord(int idLibreta){
         EntityManager em = EntityManagerHelper.getEntityManager();
         try {
-            Student result = (Student) em.createQuery(Student.BUSCAR_POR_LIBRETA).getSingleResult();
+            Student result = (Student) em.createQuery(Student.BUSCAR_POR_LIBRETA)
+                                         .setParameter("libreta", idLibreta).getSingleResult();
         } catch (NoResultException e){
             System.out.println("No existe la libreta ingresada");
             return null;
