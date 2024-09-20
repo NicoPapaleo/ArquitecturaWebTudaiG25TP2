@@ -1,5 +1,6 @@
 package repository.implementsRepositories;
 
+import dto.StudentDTO;
 import entity.Student;
 import repository.helper.EntityManagerHelper;
 
@@ -38,6 +39,21 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
             em.close();
         }
         return ls;
+    }
+
+    public List<StudentDTO> findAllStudentsOrderedByLastName() {
+        EntityManager em = EntityManagerHelper.getEntityManager();
+        List<StudentDTO>studentDTOlist=new ArrayList<>();
+        String jpql = "SELECT new dto.StudentDTO(s.name,s.lastName,s.years,s.gender,s.city.name) FROM Student s ORDER BY s.lastName";
+        try {
+            Query query = em.createQuery(jpql, StudentDTO.class);
+            studentDTOlist = query.getResultList();
+        }catch(Exception e){
+            System.out.print("error"+e);
+        }finally{
+        em.close();
+        }
+        return studentDTOlist;
     }
 
 
