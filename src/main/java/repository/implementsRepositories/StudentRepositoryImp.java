@@ -1,5 +1,6 @@
 package repository.implementsRepositories;
 
+import dto.StudentDTO;
 import entity.Student;
 import repository.helper.EntityManagerHelper;
 
@@ -23,6 +24,7 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         }
         return studentRepositoryImp;
     }
+
 
     /**
      * @Brief Solicitar lista de todos los estudiantes.
@@ -60,5 +62,7 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         }
         return new StudentDTO();
     }
+
+
 
 }
