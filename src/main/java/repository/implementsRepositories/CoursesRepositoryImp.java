@@ -1,5 +1,6 @@
 package repository.implementsRepositories;
 
+import entity.Career;
 import entity.Courses;
 import entity.Student;
 import repository.helper.EntityManagerHelper;
@@ -31,4 +32,20 @@ public class CoursesRepositoryImp extends BaseJPARepository<Courses, Integer> {
         }
         return ls;
     }
+
+    public void persistCourses(Student e1, Career c1){
+        String jpql1 = "SELECT s FROM Student s WHERE s.dni = :id";
+        String jpql2 = "SELECT c FROM Career c WHERE c.idCareer = :idCareer";
+        EntityManager em = EntityManagerHelper.getEntityManager();
+        Student student = (Student) em.createQuery(jpql1).setParameter("id",e1.getDni());
+        Career career = (Career) em.createQuery(jpql2).setParameter("idCareer", c1.getId());
+        if(student != null && career != null){
+            Courses newCourses = new Courses(e1,c1,null,false);
+            this.persist(newCourses);
+        }else{
+            System.out.println("Estudiante o carrera inexistente");
+        }
+
+    }
+
 }
