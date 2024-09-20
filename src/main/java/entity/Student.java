@@ -9,7 +9,12 @@ import java.util.List;
 import javax.persistence.*;
 
 @Entity
+@NamedQuery(name= Student.BUSCAR_POR_LIBRETA, query=" SELECT s FROM  Student s WHERE s.idLibreta = :libreta")
+@NamedQuery(name= Student.BUSCAR_TODOS, query=" SELECT s FROM  Student s")
 public class Student {
+
+    public static final String BUSCAR_POR_LIBRETA = "Student.BUSCAR_POR_LIBRETA";
+    public static final String BUSCAR_TODOS = "Student.BUSCAR_TODOS";
 
     @Id
     @Column(name="DNI")
