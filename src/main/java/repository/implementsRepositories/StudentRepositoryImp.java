@@ -1,5 +1,6 @@
 package repository.implementsRepositories;
 
+import dto.StudentDTO;
 import entity.Student;
 import repository.helper.EntityManagerHelper;
 
@@ -38,6 +39,10 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
             em.close();
         }
         return ls;
+    }
+
+    public List<StudentDTO> findStudentsByGender(char gender) {
+        String jpql = "SELECT new ";
     }
 
 
