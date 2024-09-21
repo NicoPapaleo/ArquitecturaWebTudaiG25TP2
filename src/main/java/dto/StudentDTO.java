@@ -21,6 +21,7 @@ public class StudentDTO {
     }
 
 
+
     public int getDni() {
         return dni;
     }
@@ -75,5 +76,18 @@ public class StudentDTO {
 
     public void setYears(int edad) {
         this.years = edad;
+    }
+
+    @Override
+    public String toString() {
+        return "StudentDTO{" +
+                "dni=" + dni +
+                ", idLibreta=" + idLibreta +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", gender=" + gender +
+                ", city='" + city + '\'' +
+                ", years=" + years +
+                '}';
     }
 }

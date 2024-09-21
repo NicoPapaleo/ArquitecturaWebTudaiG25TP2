@@ -49,7 +49,7 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
     public List<StudentDTO> findAllStudentsOrderedByLastName() {
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<StudentDTO>studentDTOlist=new ArrayList<>();
-        String jpql = "SELECT new dto.StudentDTO(s.name,s.lastName,s.years,s.gender,s.city.name) FROM Student s ORDER BY s.lastName";
+        String jpql = "SELECT new dto.StudentDTO(s.dni,s.idLibreta,s.name,s.lastName,s.gender,s.city.name,s.years) FROM Student s ORDER BY s.lastName";
         try {
             Query query = em.createQuery(jpql, StudentDTO.class);
             studentDTOlist = query.getResultList();
@@ -72,7 +72,7 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
 
         List<StudentDTO>ls=new ArrayList<>();
         try{
-            Query query = em.createQuery(Student.BUSCAR_POR_GENERO);
+            Query query = em.createNamedQuery(Student.BUSCAR_POR_GENERO);
             query.setParameter("gender", gender);
             ls = query.getResultList();
         } catch(Exception e){
@@ -90,14 +90,16 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
      */
     public StudentDTO studentByRecord(int idLibreta){
         EntityManager em = EntityManagerHelper.getEntityManager();
+        Student result = null;
         try {
-            Student result = (Student) em.createQuery(Student.BUSCAR_POR_LIBRETA)
+            result = (Student) em.createNamedQuery(Student.BUSCAR_POR_LIBRETA)
                                          .setParameter("libreta", idLibreta).getSingleResult();
         } catch (NoResultException e){
             System.out.println("No existe la libreta ingresada");
             return null;
         }
-        return new StudentDTO();
+        return new StudentDTO(result.getDni(),result.getIdLibreta(),result.getName(),
+                              result.getLastName(),result.getGender(),result.getCity().getName(),result.getYears());
     }
 
 }
