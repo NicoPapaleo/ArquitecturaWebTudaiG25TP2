@@ -5,7 +5,13 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Entity
+@NamedQuery(name= Career.BUSCAR_TODAS, query=" SELECT c FROM  Career c")
+@NamedQuery(name= Career.EXIST_CAREER, query=" SELECT c FROM  Career c WHERE idCareer = :idCareer")
 public class Career {
+
+    public static final String EXIST_CAREER = "Career.EXIST_CAREER";
+    public static final String BUSCAR_TODAS = "Career.BUSCAR_TODAS";
+
     @Id
     //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCareer;

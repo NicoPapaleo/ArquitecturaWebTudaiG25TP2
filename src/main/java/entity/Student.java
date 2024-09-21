@@ -12,11 +12,16 @@ import javax.persistence.*;
 @NamedQuery(name= Student.BUSCAR_POR_LIBRETA, query=" SELECT s FROM  Student s WHERE s.idLibreta = :libreta")
 @NamedQuery(name= Student.BUSCAR_TODOS, query=" SELECT s FROM  Student s")
 @NamedQuery(name= Student.BUSCAR_POR_GENERO, query="SELECT new dto.StudentDTO(s.dni, s.idLibreta, s.name, s.lastName, s.gender, s.city.name, s.years) FROM Student s WHERE s.gender = :gender")
+@NamedQuery(name= Student.BUSCAR_TODOS_ORDENADOS, query=" SELECT new dto.StudentDTO(s.dni,s.idLibreta,s.name,s.lastName,s.gender,s.city.name,s.years) FROM Student s ORDER BY s.lastName")
+@NamedQuery(name= Student.EXIST_STUDENT, query=" SELECT count(s) FROM Student s WHERE s.dni = :id")
+
 public class Student {
 
     public static final String BUSCAR_POR_LIBRETA = "Student.BUSCAR_POR_LIBRETA";
     public static final String BUSCAR_TODOS = "Student.BUSCAR_TODOS";
     public static final String BUSCAR_POR_GENERO = "Student.BUSCAR_POR_GENERO";
+    public static final String BUSCAR_TODOS_ORDENADOS = "Student.BUSCAR_TODOS_ORDENADOS";
+    public static final String EXIST_STUDENT = "Student.EXIST_STUDENT";
 
     @Id
     @Column(name="DNI")

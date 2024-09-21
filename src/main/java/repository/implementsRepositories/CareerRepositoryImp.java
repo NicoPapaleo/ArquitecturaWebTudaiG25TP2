@@ -16,11 +16,10 @@ public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
 
     @Override
     public List<Career> findAll() {
-        String jpql = "SELECT c FROM Career c";
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<Career>ls=new ArrayList<>();
         try{
-            Query query = em.createQuery(jpql);
+            Query query = em.createQuery(Career.BUSCAR_TODAS);
             ls = query.getResultList();
         }catch(Exception e){
             throw new RuntimeException("Error en la consulta"+e);

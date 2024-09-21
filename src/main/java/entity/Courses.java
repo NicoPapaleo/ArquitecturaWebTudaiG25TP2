@@ -5,7 +5,11 @@ import java.util.Date;
 import javax.persistence.*;
 
 @Entity
+@NamedQuery(name= Courses.BUSCAR_TODO, query=" SELECT c FROM  Courses c")
 public class Courses implements Serializable {
+
+    public static final String BUSCAR_TODO = "Courses.BUSCAR_TODO";
+
     @Id
     @ManyToOne
     @JoinColumn(name = "id_Student")

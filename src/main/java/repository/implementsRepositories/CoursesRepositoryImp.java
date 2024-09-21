@@ -20,11 +20,10 @@ public class CoursesRepositoryImp extends BaseJPARepository<Courses, Integer> {
 
     @Override
     public List<Courses> findAll() {
-        String jpql = "SELECT c FROM Courses c";
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<Courses>ls = new ArrayList<>();
         try{
-            Query query = em.createQuery(jpql);
+            Query query = em.createQuery(Courses.BUSCAR_TODO);
             ls = query.getResultList();
         }catch(Exception e){
             throw new RuntimeException("Error en la consulta"+e);
@@ -47,15 +46,15 @@ public class CoursesRepositoryImp extends BaseJPARepository<Courses, Integer> {
 
     private boolean existStudent(Student s){
         EntityManager em = EntityManagerHelper.getEntityManager();
-        String jpql = "SELECT count(s) FROM Student s WHERE s.dni = :id";
-        int count = (int) em.createQuery(jpql).setParameter("id",s.getDni()).getSingleResult();
+        int count = (int) em.createQuery(Student.EXIST_STUDENT).setParameter("id",s.getDni()).getSingleResult();
+        em.close();
         return count>0;
     }
 
     private boolean existCareer(Career c) {
         EntityManager em = EntityManagerHelper.getEntityManager();
-        String jpql = "SELECT count(c) FROM Career c WHERE c.idCareer = :idCareer";
-        int count = (int) em.createQuery(jpql).setParameter("idCareer", c.getId()).getSingleResult();
+        int count = (int) em.createQuery(Career.EXIST_CAREER).setParameter("idCareer", c.getId()).getSingleResult();
+        em.close();
         return count>0;
     }
 }

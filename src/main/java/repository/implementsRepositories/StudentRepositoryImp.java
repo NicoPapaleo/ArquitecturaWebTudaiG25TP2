@@ -46,12 +46,15 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         return ls;
     }
 
+    /**
+     * @brief Esttudiantes ordenados por apellido
+     * @return List de tipo EstudiantesDTO ordenada por apellido
+     */
     public List<StudentDTO> findAllStudentsOrderedByLastName() {
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<StudentDTO>studentDTOlist=new ArrayList<>();
-        String jpql = "SELECT new dto.StudentDTO(s.dni,s.idLibreta,s.name,s.lastName,s.gender,s.city.name,s.years) FROM Student s ORDER BY s.lastName";
         try {
-            Query query = em.createQuery(jpql, StudentDTO.class);
+            Query query = em.createQuery(Student.BUSCAR_TODOS_ORDENADOS, StudentDTO.class);
             studentDTOlist = query.getResultList();
         }catch(Exception e){
             System.out.print("error"+e);
@@ -97,6 +100,8 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         } catch (NoResultException e){
             System.out.println("No existe la libreta ingresada");
             return null;
+        } finally{
+            em.close();
         }
         return new StudentDTO(result.getDni(),result.getIdLibreta(),result.getName(),
                               result.getLastName(),result.getGender(),result.getCity().getName(),result.getYears());

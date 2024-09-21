@@ -26,11 +26,10 @@ public class CityRepositoryImp extends BaseJPARepository<City, Integer> {
 
     @Override
     public List<City> findAll() {
-        String jpql = "SELECT c FROM City c";
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<City>ls=new ArrayList<>();
         try{
-            Query query = em.createQuery(jpql);
+            Query query = em.createQuery(City.BUSCAR_TODAS);
             ls = query.getResultList();
         }catch(Exception e){
             throw new RuntimeException("Error en la consulta"+e);
