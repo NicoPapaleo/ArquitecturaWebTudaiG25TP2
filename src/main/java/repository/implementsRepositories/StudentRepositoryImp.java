@@ -54,7 +54,7 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<StudentDTO>studentDTOlist=new ArrayList<>();
         try {
-            Query query = em.createQuery(Student.BUSCAR_TODOS_ORDENADOS, StudentDTO.class);
+            Query query = em.createNamedQuery(Student.BUSCAR_TODOS_ORDENADOS, StudentDTO.class);
             studentDTOlist = query.getResultList();
         }catch(Exception e){
             System.out.print("error"+e);
