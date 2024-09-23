@@ -107,7 +107,7 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
                               result.getLastName(),result.getGender(),result.getCity().getName(),result.getYears());
     }
 
-    public List<StudentDTO> getStudentsByCareerOrderByCity(String careerName ,String cityName){
+    public List<StudentDTO> getStudentsByCareerFilterByCity(String careerName ,String cityName){
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<StudentDTO>listResult = new ArrayList<>();
         try{
