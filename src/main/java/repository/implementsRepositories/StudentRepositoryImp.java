@@ -107,4 +107,22 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
                               result.getLastName(),result.getGender(),result.getCity().getName(),result.getYears());
     }
 
+    public List<StudentDTO> getStudentsByCareerOrderByCity(String careerName ,String cityName){
+        EntityManager em = EntityManagerHelper.getEntityManager();
+        List<StudentDTO>listResult = new ArrayList<>();
+        try{
+            listResult=(List<StudentDTO>) em.createNamedQuery(Student.BUSCAR_POR_CARRERA)
+                    .setParameter("careerName",careerName)
+                    .setParameter("cityName",cityName)
+                    .getResultList();
+        }catch (NoResultException e){
+            System.out.println("No existen en la ciudad ingresada");
+        }
+        finally{
+            em.close();
+        }
+        return listResult;
+    }
+
 }
+
