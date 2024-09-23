@@ -104,6 +104,10 @@ public class App
         //b)matricular un estudiante a una carrera
         //coursesRepositoryImp.enrollStudent(s,career1);
 
+        List<StudentDTO>studentsFilterByCity = sr.getStudentsByCareerFilterByCity("TUDAI","Tandil");
+        System.out.println("lista filtrada por ciudad y carrera");
+        studentsFilterByCity.forEach(studentDTO -> System.out.println(studentDTO.toString()));
+
 
         EntityManagerHelper.closeEntityManagerFactory();
 
