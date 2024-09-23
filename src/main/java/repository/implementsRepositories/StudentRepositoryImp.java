@@ -54,7 +54,7 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<StudentDTO>studentDTOlist=new ArrayList<>();
         try {
-            Query query = em.createQuery(Student.BUSCAR_TODOS_ORDENADOS, StudentDTO.class);
+            Query query = em.createNamedQuery(Student.BUSCAR_TODOS_ORDENADOS, StudentDTO.class);
             studentDTOlist = query.getResultList();
         }catch(Exception e){
             System.out.print("error"+e);
@@ -107,4 +107,22 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
                               result.getLastName(),result.getGender(),result.getCity().getName(),result.getYears());
     }
 
+    public List<StudentDTO> getStudentsByCareerFilterByCity(String careerName ,String cityName){
+        EntityManager em = EntityManagerHelper.getEntityManager();
+        List<StudentDTO>listResult = new ArrayList<>();
+        try{
+            listResult=(List<StudentDTO>) em.createNamedQuery(Student.BUSCAR_POR_CARRERA)
+                    .setParameter("careerName",careerName)
+                    .setParameter("cityName",cityName)
+                    .getResultList();
+        }catch (NoResultException e){
+            System.out.println("No existen en la ciudad ingresada");
+        }
+        finally{
+            em.close();
+        }
+        return listResult;
+    }
+
 }
+
