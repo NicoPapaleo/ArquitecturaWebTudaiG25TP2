@@ -109,9 +109,9 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
 
     public List<StudentDTO> getStudentsByCareerFilterByCity(String careerName ,String cityName){
         EntityManager em = EntityManagerHelper.getEntityManager();
-        List<StudentDTO>listResult = new ArrayList<>();
+        List<Student>listResult = new ArrayList<>();
         try{
-            listResult=(List<StudentDTO>) em.createNamedQuery(Student.BUSCAR_POR_CARRERA)
+            listResult=(List<Student>) em.createNamedQuery(Student.BUSCAR_POR_CARRERA)
                     .setParameter("careerName",careerName)
                     .setParameter("cityName",cityName)
                     .getResultList();
@@ -121,7 +121,12 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         finally{
             em.close();
         }
-        return listResult;
+        List<StudentDTO>studentDTOlist=new ArrayList<>();
+        for (Student s : listResult){
+            studentDTOlist.add(new StudentDTO(s.getDni(),s.getIdLibreta(),s.getName(),
+                    s.getLastName(),s.getGender(),s.getCity().getName(),s.getYears()));
+        }
+        return studentDTOlist;
     }
 
 }
