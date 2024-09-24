@@ -1,5 +1,6 @@
 package org.example;
 
+import dto.CareerDTO;
 import dto.StudentDTO;
 import entity.Career;
 import entity.City;
@@ -24,7 +25,7 @@ public class App
     public static void main( String[] args ) {
         System.out.println("Hello World!");
         //creacion de registros
-        /*
+/*
         City c1 = new City(1,"Tandil");
         City c2 = new City(2, "Olavarria");
         City c3 = new City(3, "Azul");
@@ -44,12 +45,12 @@ public class App
         Career career2 = new Career(2,"TUARI");
         Career career3 = new Career(3,"TUPAR");
 
-        Courses alumnoCursa1=new Courses(s,career1,null,false);
+        Courses alumnoCursa1=new Courses(s,career2,null,false);
         Courses alumnoCursa2=new Courses(s1,career2,null,false);
-        Courses alumnoCursa3=new Courses(s2,career3,null,false);
+        Courses alumnoCursa3=new Courses(s2,career2,null,false);
         Courses alumnoCursa4=new Courses(s3,career1,null,false);
         Courses alumnoCursa5=new Courses(s4,career2,null,false);
-        Courses alumnoCursa6=new Courses(s5,career3,null,false);
+        Courses alumnoCursa6=new Courses(s5,career2,null,false);
         Courses alumnoCursa7=new Courses(s6,career1,null,false);
         Courses alumnoCursa8=new Courses(s7,career1,null,false);
 
@@ -62,21 +63,21 @@ public class App
         s6.addCourses(alumnoCursa7);
         s7.addCourses(alumnoCursa8);
 
-        career1.addCourses(alumnoCursa1);
+        career2.addCourses(alumnoCursa1);
         career1.addCourses(alumnoCursa4);
         career1.addCourses(alumnoCursa7);
         career2.addCourses(alumnoCursa2);
         career2.addCourses(alumnoCursa5);
-        career3.addCourses(alumnoCursa3);
-        career3.addCourses(alumnoCursa6);
+        career2.addCourses(alumnoCursa3);
+        career2.addCourses(alumnoCursa6);
         career1.addCourses(alumnoCursa7);
-        */
 
+*/
         StudentRepositoryImp sr = new StudentRepositoryImp();
         CareerRepositoryImp careerRepositoryImp = new CareerRepositoryImp();
         CoursesRepositoryImp coursesRepositoryImp = new CoursesRepositoryImp();
 
-        /*
+/*
         careerRepositoryImp.persist(career1);careerRepositoryImp.persist(career2);careerRepositoryImp.persist(career3);
 
         sr.persist(s);sr.persist(s1);sr.persist(s2);sr.persist(s3);sr.persist(s4);sr.persist(s5);sr.persist(s6);sr.persist(s7);
@@ -90,7 +91,7 @@ public class App
         coursesRepositoryImp.persist(alumnoCursa7);
         coursesRepositoryImp.persist(alumnoCursa8);
 
-         */
+*/
 
         List<StudentDTO>studentsOrderedByLastName = sr.findAllStudentsOrderedByLastName();
         System.out.println("lista ordenada por alfabeto");
@@ -112,6 +113,12 @@ public class App
         List<StudentDTO>studentsFilterByCity = sr.getStudentsByCareerFilterByCity("TUDAI","Tandil");
         System.out.println("lista filtrada por ciudad y carrera");
         studentsFilterByCity.forEach(studentDTO -> System.out.println(studentDTO.toString()));
+
+        List<CareerDTO> careerFilterByEnrolledStudent = careerRepositoryImp.findByEnrolledStudentsOrderedByCant();
+        System.out.println("lista de carrera por estudiantes ingresados");
+        for(CareerDTO cd : careerFilterByEnrolledStudent){
+            System.out.println(cd.toString());
+        }
 
 
         EntityManagerHelper.closeEntityManagerFactory();

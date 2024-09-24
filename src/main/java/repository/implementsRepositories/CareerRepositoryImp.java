@@ -2,7 +2,6 @@ package repository.implementsRepositories;
 
 import dto.CareerDTO;
 import entity.Career;
-import entity.Student;
 import repository.helper.EntityManagerHelper;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
@@ -35,12 +34,12 @@ public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
      * @brief busca las carreras con estudiantes inscriptos ordenados por cantidad
      * @return retorna una lista de carreras ordenada por cantidad
      */
-    /*public List<CareerDTO> findByEnrolledStudentsOrderedByCant() {
+    public List<CareerDTO> findByEnrolledStudentsOrderedByCant() {
         EntityManager em = EntityManagerHelper.getEntityManager();
-        List<CareerDTO> lc =new ArrayList<>();
+        List<CareerDTO> careerDTOlist =new ArrayList<>();
         try {
-            Query query = em.createNamedQuery(Career.BUSCAR_ESTUDIANTES_ORDENADOS, CareerDTO.class);
-            lc = query.getResultList();
+            Query query = em.createNamedQuery(Career.BUSCAR_CARRERAS_POR_ESTUDIANTES_INSCRIPTOS, CareerDTO.class);
+            careerDTOlist = query.getResultList();
         }
         catch(Exception e){
             throw new RuntimeException("Error en la consulta"+e);
@@ -48,6 +47,6 @@ public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
         finally{
             em.close();
         }
-        return lc;
-    }*/
+        return careerDTOlist;
+    }
 }
