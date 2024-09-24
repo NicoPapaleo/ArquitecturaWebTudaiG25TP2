@@ -24,6 +24,7 @@ public class App
     public static void main( String[] args ) {
         System.out.println("Hello World!");
         //creacion de registros
+        /*
         City c1 = new City(1,"Tandil");
         City c2 = new City(2, "Olavarria");
         City c3 = new City(3, "Azul");
@@ -69,11 +70,13 @@ public class App
         career3.addCourses(alumnoCursa3);
         career3.addCourses(alumnoCursa6);
         career1.addCourses(alumnoCursa7);
+        */
 
         StudentRepositoryImp sr = new StudentRepositoryImp();
         CareerRepositoryImp careerRepositoryImp = new CareerRepositoryImp();
         CoursesRepositoryImp coursesRepositoryImp = new CoursesRepositoryImp();
 
+        /*
         careerRepositoryImp.persist(career1);careerRepositoryImp.persist(career2);careerRepositoryImp.persist(career3);
 
         sr.persist(s);sr.persist(s1);sr.persist(s2);sr.persist(s3);sr.persist(s4);sr.persist(s5);sr.persist(s6);sr.persist(s7);
@@ -86,6 +89,8 @@ public class App
         coursesRepositoryImp.persist(alumnoCursa6);
         coursesRepositoryImp.persist(alumnoCursa7);
         coursesRepositoryImp.persist(alumnoCursa8);
+
+         */
 
         List<StudentDTO>studentsOrderedByLastName = sr.findAllStudentsOrderedByLastName();
         System.out.println("lista ordenada por alfabeto");
