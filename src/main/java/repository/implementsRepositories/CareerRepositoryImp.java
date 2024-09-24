@@ -35,7 +35,7 @@ public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
      * @brief busca las carreras con estudiantes inscriptos ordenados por cantidad
      * @return retorna una lista de carreras ordenada por cantidad
      */
-    public List<CareerDTO> findByEnrolledStudentsOrderedByCant() {
+    /*public List<CareerDTO> findByEnrolledStudentsOrderedByCant() {
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<CareerDTO> lc =new ArrayList<>();
         try {
@@ -49,5 +49,5 @@ public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
             em.close();
         }
         return lc;
-    }
+    }*/
 }

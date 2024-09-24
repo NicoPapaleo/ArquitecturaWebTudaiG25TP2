@@ -87,22 +87,26 @@ public class App
         coursesRepositoryImp.persist(alumnoCursa7);
         coursesRepositoryImp.persist(alumnoCursa8);
 
-        //List<StudentDTO>studentsOrderedByLastName = sr.findAllStudentsOrderedByLastName();
-        //System.out.println("lista ordenada por alfabeto");
-        //studentsOrderedByLastName.forEach(studentDTO -> System.out.println(studentDTO.toString()));
+        List<StudentDTO>studentsOrderedByLastName = sr.findAllStudentsOrderedByLastName();
+        System.out.println("lista ordenada por alfabeto");
+        studentsOrderedByLastName.forEach(studentDTO -> System.out.println(studentDTO.toString()));
 
-        //StudentDTO studentByRecord =sr.studentByRecord(12);
-        //System.out.println("Estudiante con libreta numero 12");
-        //System.out.println(studentByRecord.toString());
+        StudentDTO studentByRecord =sr.studentByRecord(12);
+        System.out.println("Estudiante con libreta numero 12");
+        System.out.println(studentByRecord.toString());
 
-        //List<StudentDTO>studentsFilterByGender = sr.findStudentsByGender('M');
-        //System.out.println("lista filtrada por genero");
-        //studentsFilterByGender.forEach(studentDTO -> System.out.println(studentDTO.toString()));
+        List<StudentDTO>studentsFilterByGender = sr.findStudentsByGender('M');
+        System.out.println("lista filtrada por genero");
+        studentsFilterByGender.forEach(studentDTO -> System.out.println(studentDTO.toString()));
 
 
 
         //b)matricular un estudiante a una carrera
         //coursesRepositoryImp.enrollStudent(s,career1);
+
+        List<StudentDTO>studentsFilterByCity = sr.getStudentsByCareerFilterByCity("TUDAI","Tandil");
+        System.out.println("lista filtrada por ciudad y carrera");
+        studentsFilterByCity.forEach(studentDTO -> System.out.println(studentDTO.toString()));
 
 
         EntityManagerHelper.closeEntityManagerFactory();
