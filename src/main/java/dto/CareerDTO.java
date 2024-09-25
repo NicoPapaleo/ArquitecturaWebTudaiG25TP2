@@ -7,12 +7,12 @@ import java.util.List;
 public class CareerDTO {
     private int idCareer;
     private String name;
-    //private List<Courses> students;
+    private long cantEstudiantes;
 
-    public CareerDTO(int id, String name/*, List<Courses> students*/) {
+    public CareerDTO(int id, String name, long cantEstudiantes) {
         this.idCareer = id;
         this.name = name;
-        //this.students = students;
+        this.cantEstudiantes=cantEstudiantes;
     }
 
     public int getId() {
@@ -30,21 +30,17 @@ public class CareerDTO {
     public void setName(String name) {
         this.name = name;
     }
-/*
-    public List<Courses> getStudents() {
-        return students;
+
+    public long getCantEstudiantes(){
+        return cantEstudiantes;
     }
 
-    public void setStudents(List<Courses> students) {
-        this.students = students;
-    }
-*/
     @Override
     public String toString() {
         return "CareerDTO{" +
-                "id=" + idCareer +
+                "idCareer=" + idCareer +
                 ", name='" + name + '\'' +
-               // ", students=" + students +
+                ", cantEstudiantes=" + cantEstudiantes +
                 '}';
     }
 }

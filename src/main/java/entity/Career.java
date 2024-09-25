@@ -12,7 +12,7 @@ import java.util.List;
         "FROM Career c JOIN c.students cs " +  // 'students' es el mapeo hacia Courses
         "GROUP BY c.name, YEAR(cs.start_date) " +
         "ORDER BY c.name, YEAR(cs.start_date) desc")
-@NamedQuery(name= Career.BUSCAR_CARRERAS_POR_ESTUDIANTES_INSCRIPTOS, query="SELECT new dto.CareerDTO(c.id, c.name) FROM Career c JOIN Courses cu ON c.idCareer = cu.career.id JOIN Student s ON s.id = cu.student.id GROUP BY c.id, c.name HAVING COUNT(cu)>0 ORDER BY COUNT(cu) DESC")
+@NamedQuery(name= Career.BUSCAR_CARRERAS_POR_ESTUDIANTES_INSCRIPTOS, query="SELECT new dto.CareerDTO(c.id, c.name,COUNT(s)) FROM Career c JOIN c.students s GROUP BY c.id, c.name HAVING COUNT(s)>0 ORDER BY COUNT(s) DESC")
 
 public class Career {
 
