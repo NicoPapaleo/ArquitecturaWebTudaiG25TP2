@@ -13,9 +13,16 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CoursesRepositoryImp extends BaseJPARepository<Courses, Integer> {
-
+    private static CoursesRepositoryImp coursesRepositoryImp;
     public CoursesRepositoryImp() {
         super(Courses.class, Integer.class);
+    }
+
+    public static CoursesRepositoryImp getInstance(){
+        if(coursesRepositoryImp==null){
+            return new CoursesRepositoryImp();
+        }
+        return coursesRepositoryImp;
     }
 
     @Override

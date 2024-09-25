@@ -14,7 +14,7 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
 
     public BaseJPARepository(Class<Entity>entityClass, Class<ID> idClass){
         this.entityClass=entityClass;
-        //this.idClass=idClass;
+
     }
 
     @Override
@@ -57,7 +57,6 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
         }
         try{
             em.getTransaction().begin();
-            System.out.print("estoy dentro del try");
             em.remove(entity);
             em.getTransaction().commit();
         }catch(Exception e){
