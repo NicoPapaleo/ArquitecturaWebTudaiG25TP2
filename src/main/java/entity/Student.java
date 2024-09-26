@@ -46,7 +46,7 @@ public class Student {
     @ManyToOne
     private City city;
     //cambiar a lazy
-    @OneToMany(mappedBy = "student", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     private List<Courses> courses;  // muestro todas las carreras que cursa el estudiante
 
     public Student(){}

@@ -27,11 +27,11 @@ public class Courses implements Serializable {
 
     public Courses() {}
 
-    public Courses(Student student, Career career, Date startDate, boolean graduated) {
+    public Courses(Student student, Career career) {
         this.student = student;
         this.career = career;
-        this.start_date = startDate;
-        this.graduated = graduated;
+        this.start_date = new Date();
+        this.graduated = false;
     }
 
     public Career getCareer() {

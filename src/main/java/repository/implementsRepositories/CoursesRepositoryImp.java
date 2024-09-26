@@ -44,7 +44,7 @@ public class CoursesRepositoryImp extends BaseJPARepository<Courses, Integer> {
 
     public void enrollStudent(Student e1, Career c1){
         if(existStudent(e1) && existCareer(c1)){
-            Courses newCourses = new Courses(e1,c1,null,false);
+            Courses newCourses = new Courses(e1,c1);
             this.persist(newCourses);
         }else{
             System.out.println("Estudiante o Carrera inexistente");
