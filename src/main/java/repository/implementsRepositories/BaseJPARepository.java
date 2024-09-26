@@ -22,11 +22,10 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
         Entity entity=null;
         em = EntityManagerHelper.getEntityManager();
         try{
-            System.out.print("estoy dentro del try");
             entity=em.find(entityClass,id);
         }
         catch(Exception e){
-            throw new RuntimeException("Error al buscar el id"+id+e);
+            throw new RuntimeException("Error al buscar el id "+id+e);
         }
         finally{
             em.close();
@@ -36,14 +35,13 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
 
     @Override
     public void persist(Entity entity) {
-        em=EntityManagerHelper.getEntityManager();
+        em = EntityManagerHelper.getEntityManager();
         try{
-            System.out.print("estoy dentro del try");
             em.getTransaction().begin();
             em.persist(entity);
             em.getTransaction().commit();
         }catch (Exception e) {
-            throw new RuntimeException("Error al insertar"+entity.toString()+e);
+            throw new RuntimeException("Error al insertar "+entity.toString()+e);
         }finally {
             em.close();
         }
@@ -51,7 +49,7 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
 
     @Override
     public void delete(Entity entity) {
-        em=EntityManagerHelper.getEntityManager();
+        em = EntityManagerHelper.getEntityManager();
         if (!em.contains(entity)) {
             entity = em.merge(entity);  // Reanexar la entidad si está detach
         }
@@ -60,7 +58,7 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
             em.remove(entity);
             em.getTransaction().commit();
         }catch(Exception e){
-            throw new RuntimeException("No se puede eliminar"+entity.toString()+e);
+            throw new RuntimeException("No se puede eliminar "+entity.toString()+e);
         }
         finally {
             em.close();

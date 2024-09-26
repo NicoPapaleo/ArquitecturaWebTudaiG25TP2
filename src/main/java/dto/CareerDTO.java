@@ -39,8 +39,8 @@ public class CareerDTO {
     public String toString() {
         return "CareerDTO{" +
                 "idCareer=" + idCareer +
-                ", name='" + name + '\'' +
-                ", cantEstudiantes=" + cantEstudiantes +
+                ", nombre='" + name + '\'' +
+                ", cantidad de estudiantes=" + cantEstudiantes +
                 '}';
     }
 }

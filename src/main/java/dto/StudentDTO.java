@@ -20,8 +20,6 @@ public class StudentDTO {
         this.years = years;
     }
 
-
-
     public int getDni() {
         return dni;
     }
@@ -83,11 +81,11 @@ public class StudentDTO {
         return "StudentDTO{" +
                 "dni=" + dni +
                 ", idLibreta=" + idLibreta +
-                ", name='" + name + '\'' +
-                ", lastName='" + lastName + '\'' +
-                ", gender=" + gender +
-                ", city='" + city + '\'' +
-                ", years=" + years +
+                ", nombre='" + name + '\'' +
+                ", apellido='" + lastName + '\'' +
+                ", genero=" + gender +
+                ", ciudad='" + city + '\'' +
+                ", edad=" + years +
                 '}';
     }
 }

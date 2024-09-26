@@ -33,7 +33,7 @@ public class CoursesRepositoryImp extends BaseJPARepository<Courses, Integer> {
             Query query = em.createQuery(Courses.BUSCAR_TODO);
             ls = query.getResultList();
         }catch(Exception e){
-            throw new RuntimeException("Error en la consulta"+e);
+            throw new RuntimeException("Error en la consulta "+e);
         }
         finally{
             em.close();
