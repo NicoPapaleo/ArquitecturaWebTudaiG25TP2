@@ -51,10 +51,10 @@ public class ReportCareerDTO {
     @Override
     public String toString() {
         return "ReportCareerDTO{" +
-                "careerName='" + careerName + '\'' +
-                ", year=" + year +
-                ", enrolled=" + enrolled +
-                ", graduated=" + graduated +
+                "Carrera='" + careerName + '\'' +
+                ", Anio=" + year +
+                ", Estudiantes inscriptos=" + enrolled +
+                ", Graduado=" + graduated +
                 '}';
     }
 }

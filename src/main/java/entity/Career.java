@@ -15,15 +15,12 @@ import java.util.List;
 @NamedQuery(name= Career.BUSCAR_CARRERAS_POR_ESTUDIANTES_INSCRIPTOS, query="SELECT new dto.CareerDTO(c.id, c.name,COUNT(s)) FROM Career c JOIN c.students s GROUP BY c.id, c.name HAVING COUNT(s)>0 ORDER BY COUNT(s) DESC")
 
 public class Career {
-
     public static final String EXIST_CAREER = "Career.EXIST_CAREER";
     public static final String BUSCAR_TODAS = "Career.BUSCAR_TODAS";
     public static final String GENERAR_REPORTE="Career.GENERAR_REPORTE";
     public static final String BUSCAR_CARRERAS_POR_ESTUDIANTES_INSCRIPTOS = "Career.BUSCAR_CARRERAS_POR_ESTUDIANTES_INSCRIPTOS";
 
-
     @Id
-    //@GeneratedValue(strategy = GenerationType.IDENTITY)
     private int idCareer;
 
     @Column(name = "Nombre")
@@ -60,8 +57,8 @@ public class Career {
     public String toString() {
         return "Career{" +
                 "id=" + idCareer +
-                ", name='" + name + '\'' +
-                ", students=" + students +
+                ", nombre='" + name + '\'' +
+                ", estudiantes=" + students +
                 '}';
     }
 }

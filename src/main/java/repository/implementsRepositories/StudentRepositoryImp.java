@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
-
     private static StudentRepositoryImp studentRepositoryImp;
 
     public StudentRepositoryImp() {
@@ -33,7 +32,7 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
     @Override
     public List<Student> findAll() {
         EntityManager em = EntityManagerHelper.getEntityManager();
-        List<Student>ls=new ArrayList<>();
+        List<Student> ls =new ArrayList<>();
         try{
             Query query = em.createQuery(Student.BUSCAR_TODOS);
             ls = query.getResultList();
@@ -52,12 +51,12 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
      */
     public List<StudentDTO> findAllStudentsOrderedByLastName() {
         EntityManager em = EntityManagerHelper.getEntityManager();
-        List<StudentDTO>studentDTOlist=new ArrayList<>();
+        List<StudentDTO>studentDTOlist = new ArrayList<>();
         try {
             Query query = em.createNamedQuery(Student.BUSCAR_TODOS_ORDENADOS, StudentDTO.class);
             studentDTOlist = query.getResultList();
         }catch(Exception e){
-            System.out.print("error"+e);
+            System.out.print("error "+e);
         }finally{
         em.close();
         }
@@ -72,14 +71,13 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
 
     public List<StudentDTO> findStudentsByGender(char gender) {
         EntityManager em = EntityManagerHelper.getEntityManager();
-
-        List<StudentDTO>ls=new ArrayList<>();
+        List<StudentDTO>ls = new ArrayList<>();
         try{
             Query query = em.createNamedQuery(Student.BUSCAR_POR_GENERO);
             query.setParameter("gender", gender);
             ls = query.getResultList();
         } catch(Exception e){
-            throw new RuntimeException("Error en la consulta"+e);
+            throw new RuntimeException("Error en la consulta "+e);
         } finally {
             em.close();
         }

@@ -7,7 +7,6 @@ import javax.persistence.*;
 @Entity
 @NamedQuery(name= Courses.BUSCAR_TODO, query=" SELECT c FROM  Courses c")
 public class Courses implements Serializable {
-
     public static final String BUSCAR_TODO = "Courses.BUSCAR_TODO";
 
     @Id
@@ -54,10 +53,10 @@ public class Courses implements Serializable {
     @Override
     public String toString() {
         return "Courses{" +
-                "student=" + student +
-                ", career=" + career +
-                ", start_date=" + start_date +
-                ", graduated=" + graduated +
+                "estudiante=" + student +
+                ", carrera=" + career +
+                ", inicio=" + start_date +
+                ", graduado=" + graduated +
                 '}';
     }
 }

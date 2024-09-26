@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
-    
     private static CareerRepositoryImp carrerRepositoryImp;
 
     public CareerRepositoryImp() {
@@ -28,7 +27,7 @@ public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
     @Override
     public List<Career> findAll() {
         EntityManager em = EntityManagerHelper.getEntityManager();
-        List<Career>ls=new ArrayList<>();
+        List<Career> ls =new ArrayList<>();
         try{
             Query query = em.createQuery(Career.BUSCAR_TODAS);
             ls = query.getResultList();
@@ -53,7 +52,7 @@ public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
             careerDTOlist = query.getResultList();
         }
         catch(Exception e){
-            throw new RuntimeException("Error en la consulta"+e);
+            throw new RuntimeException("Error en la consulta "+e);
         }
         finally{
             em.close();
@@ -64,7 +63,6 @@ public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
 
 
     public List<ReportCareerDTO> generateCareerReport() {
-
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<ReportCareerDTO> report = new ArrayList<>();
 
