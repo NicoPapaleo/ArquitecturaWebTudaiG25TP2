@@ -1,7 +1,6 @@
 package repository.implementsRepositories;
 
 import entity.City;
-import entity.Student;
 import repository.helper.EntityManagerHelper;
 
 import javax.persistence.EntityManager;
@@ -29,7 +28,7 @@ public class CityRepositoryImp extends BaseJPARepository<City, Integer> {
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<City>ls=new ArrayList<>();
         try{
-            Query query = em.createQuery(City.BUSCAR_TODAS);
+            Query query = em.createNamedQuery(City.BUSCAR_TODAS);
             ls = query.getResultList();
         }catch(Exception e){
             throw new RuntimeException("Error en la consulta"+e);

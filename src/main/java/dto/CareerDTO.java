@@ -1,9 +1,5 @@
 package dto;
 
-import entity.Courses;
-
-import java.util.List;
-
 public class CareerDTO {
     private int idCareer;
     private String name;

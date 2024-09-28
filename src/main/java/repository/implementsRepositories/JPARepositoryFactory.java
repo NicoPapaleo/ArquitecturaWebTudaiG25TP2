@@ -1,6 +1,6 @@
 package repository.implementsRepositories;
 
-import repository.interfaceRepository.*;
+import repository.interfaceRepository.RepositoryFactory;
 
 public class JPARepositoryFactory implements RepositoryFactory {
 

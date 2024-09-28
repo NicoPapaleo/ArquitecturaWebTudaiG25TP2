@@ -6,7 +6,7 @@ import java.util.List;
 
 @Entity
 @NamedQuery(name= Career.BUSCAR_TODAS, query=" SELECT c FROM  Career c")
-@NamedQuery(name= Career.EXIST_CAREER, query=" SELECT c FROM  Career c WHERE idCareer = :idCareer")
+@NamedQuery(name= Career.EXIST_CAREER, query=" SELECT 1 FROM  Career c WHERE idCareer = :idCareer")
 @NamedQuery(name=Career.GENERAR_REPORTE, query ="SELECT new dto.ReportCareerDTO(c.name, YEAR(cs.start_date), " +
         "COUNT(cs.student), SUM(CASE WHEN cs.graduated = true THEN 1 ELSE 0 END)) " +
         "FROM Career c JOIN c.students cs " +  // 'students' es el mapeo hacia Courses

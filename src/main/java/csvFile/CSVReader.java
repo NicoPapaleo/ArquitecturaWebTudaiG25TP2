@@ -2,6 +2,7 @@ package csvFile;
 
 import entity.Career;
 import entity.City;
+import entity.Courses;
 import entity.Student;
 import repository.implementsRepositories.*;
 import repository.interfaceRepository.RepositoryFactory;
@@ -9,11 +10,13 @@ import repository.interfaceRepository.RepositoryFactory;
 import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
+import java.time.LocalDate;
+import java.util.Date;
 
 public class CSVReader {
 
     private RepositoryFactory repositoryFactoryJPA;
-    private static final String PATH="./src/main/java/csvFiles/";
+    private static final String PATH = "src/main/java/csvFile/";
 
     public CSVReader(){
         repositoryFactoryJPA = new JPARepositoryFactory();
@@ -28,10 +31,9 @@ public class CSVReader {
 
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
-                //se usa la coma como separador
                 if (!line.startsWith("/") && !line.trim().isEmpty()) {
                     String[] datos = line.split(cvsSplitBy);
-                    City cityStudent = cityRepository.findById(Integer.parseInt(datos[7]));
+                    City cityStudent = cityRepository.findById(Integer.parseInt(datos[6]));
                     Student newStudent = new Student(Integer.parseInt(datos[0]), Integer.parseInt(datos[1]),
                                                      datos[2], datos[3], Integer.parseInt(datos[4]),
                                                      datos[5].charAt(0), cityStudent);
@@ -52,7 +54,6 @@ public class CSVReader {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
                 if (!line.startsWith("/") && !line.trim().isEmpty()) {
-                    //se usa la coma como separador
                     String[] datos = line.split(cvsSplitBy);
                     City newCity = new City(Integer.parseInt(datos[0]), datos[1]);
                     cityRepository.persist(newCity);
@@ -72,7 +73,6 @@ public class CSVReader {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
                 if (!line.startsWith("/") && !line.trim().isEmpty()) {
-                    //se usa la coma como separador
                     String[] datos = line.split(cvsSplitBy);
                     Career newCareer = new Career(Integer.parseInt(datos[0]), datos[1]);
                     careerRepository.persist(newCareer);
@@ -94,11 +94,18 @@ public class CSVReader {
         try (BufferedReader br = new BufferedReader(new FileReader(csvFile))) {
             while ((line = br.readLine()) != null) {
                 if (!line.startsWith("/") && !line.trim().isEmpty()) {
-                    //se usa la coma como separador
                     String[] datos = line.split(cvsSplitBy);
                     Student student = studentRepository.findById(Integer.parseInt(datos[0]));
-                    Career career = careerRepository.findById(Integer.parseInt(datos[0]));
-                    coursesRepository.enrollStudent(student,career);
+                    Career career = careerRepository.findById(Integer.parseInt(datos[1]));
+                    LocalDate inscrip = LocalDate.of(Integer.parseInt(datos[2]),Integer.parseInt(datos[3]),Integer.parseInt(datos[4]));
+                    Courses newCourses = null;
+                    if(Integer.parseInt(datos[5]) == 1){
+                        LocalDate fechaGraduado = LocalDate.of(Integer.parseInt(datos[6]),Integer.parseInt(datos[7]),Integer.parseInt(datos[8]));
+                        newCourses = new Courses(student,career,inscrip,fechaGraduado);
+                    }else{
+                        newCourses = new Courses(student,career,inscrip);
+                    }
+                    coursesRepository.persist(newCourses);
                 }
             }
         } catch (IOException e) {

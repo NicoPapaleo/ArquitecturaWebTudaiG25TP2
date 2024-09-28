@@ -1,9 +1,6 @@
 package org.example;
 
 
-import dto.ReportCareerDTO;
-import dto.CareerDTO;
-import dto.StudentDTO;
 import entity.Career;
 import entity.City;
 import entity.Courses;
@@ -13,8 +10,6 @@ import repository.implementsRepositories.*;
 import repository.interfaceRepository.RepositoryFactory;
 import setup.InitializeJPA;
 
-import javax.persistence.EntityManager;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -32,62 +27,43 @@ public class App
         CareerRepositoryImp careerRepository = repositoryFactoryJPA.getCareerRepository();
         CoursesRepositoryImp coursesRepository = repositoryFactoryJPA.getCoursesRepository();
 
+        InitializeJPA in = new InitializeJPA(repositoryFactoryJPA);
+
+        // Cargar y llenar base de datos
         InitializeJPA.loadDataBase();
 
-        /* VER SI CORRESPONDE HACER ESTO
+        // a) Dar de alta un nuevo estudiante
+        City cityStudent = cityRepository.findById(2);
+        Student newStudent = new Student(18529742,52,"juan","Foschino",45,'M',cityStudent);
+        InitializeJPA.addStudent(newStudent);
 
-        s.addCourses(alumnoCursa1);
-        s1.addCourses(alumnoCursa2);
-        s2.addCourses(alumnoCursa3);
-        s3.addCourses(alumnoCursa4);
-        s4.addCourses(alumnoCursa5);
-        s5.addCourses(alumnoCursa6);
-        s6.addCourses(alumnoCursa7);
-        s7.addCourses(alumnoCursa8);
+        // b) Matricular un estudiante a una carrera nuevo
+        Career career = careerRepository.findById(3);
+        coursesRepository.enrollStudent(newStudent,career);
 
-        career2.addCourses(alumnoCursa1);
-        career1.addCourses(alumnoCursa4);
-        career1.addCourses(alumnoCursa7);
-        career2.addCourses(alumnoCursa2);
-        career2.addCourses(alumnoCursa5);
-        career2.addCourses(alumnoCursa3);
-        career2.addCourses(alumnoCursa6);
-        career1.addCourses(alumnoCursa7);
+        // b) Matricular un estudiante a una carrera ya existente
+        Student existentStudent = studentRepository.findById(9653211);
+        coursesRepository.enrollStudent(existentStudent,career);
 
-        */
+        // c) Recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple
+        InitializeJPA.studentsOrderedByLastName();
 
-        List<StudentDTO>studentsOrderedByLastName = studentRepository.findAllStudentsOrderedByLastName();
-        System.out.println("lista ordenada por alfabeto");
-        studentsOrderedByLastName.forEach(studentDTO -> System.out.println(studentDTO.toString()));
+        // d) Recuperar un estudiante, en base a su número de libreta universitaria
+        InitializeJPA.studentByRecord(5);
 
-        StudentDTO studentByRecord =studentRepository.studentByRecord(12);
-        System.out.println("Estudiante con libreta numero 12");
-        System.out.println(studentByRecord.toString());
+        // e) Recuperar todos los estudiantes, en base a su género
+        InitializeJPA.studentsFilterByGender('F');
 
-        List<StudentDTO>studentsFilterByGender = studentRepository.findStudentsByGender('M');
-        System.out.println("lista filtrada por genero");
-        studentsFilterByGender.forEach(studentDTO -> System.out.println(studentDTO.toString()));
+        // f) Recuperar las carreras con estudiantes inscriptos, y ordenar por cantidad de inscriptos.
+        InitializeJPA.careerFilterByEnrolledStudent();
 
+        // g) Gecuperar los estudiantes de una determinada carrera, filtrado por ciudad de residencia
+        InitializeJPA.studentsFilterByCity("Tudai","Azul");
 
-
-        //b)matricular un estudiante a una carrera
-        //coursesRepositoryImp.enrollStudent(s,career1);
-
-        List<StudentDTO>studentsFilterByCity = studentRepository.getStudentsByCareerFilterByCity("TUDAI","Tandil");
-        System.out.println("lista filtrada por ciudad y carrera");
-        studentsFilterByCity.forEach(studentDTO -> System.out.println(studentDTO.toString()));
-
-
-        System.out.println("ejercicio numero 3");//acomodar
-        List<ReportCareerDTO> reportCareerDTO = careerRepository.generateCareerReport();
-        reportCareerDTO.forEach(reportCareer->System.out.println(reportCareer.toString()));
-
-        List<CareerDTO> careerFilterByEnrolledStudent = careerRepository.findByEnrolledStudentsOrderedByCant();
-        System.out.println("lista de carrera por estudiantes ingresados");
-        for(CareerDTO cd : careerFilterByEnrolledStudent){
-            System.out.println(cd.toString());
-        }
-
+        // Generar un reporte de las carreras, que para cada carrera incluya información de los
+        //inscriptos y egresados por año. Se deben ordenar las carreras alfabéticamente, y presentar
+        //los años de manera cronológica.
+        InitializeJPA.enunciado3();
 
         EntityManagerHelper.closeEntityManagerFactory();
 

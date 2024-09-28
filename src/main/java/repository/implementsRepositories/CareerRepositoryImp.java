@@ -30,7 +30,7 @@ public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<Career>ls=new ArrayList<>();
         try{
-            Query query = em.createQuery(Career.BUSCAR_TODAS);
+            Query query = em.createNamedQuery(Career.BUSCAR_TODAS);
             ls = query.getResultList();
         }catch(Exception e){
             throw new RuntimeException("Error en la consulta"+e);

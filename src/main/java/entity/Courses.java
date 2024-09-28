@@ -1,7 +1,9 @@
 package entity;
 
+import com.sun.istack.Nullable;
+
 import java.io.Serializable;
-import java.util.Date;
+import java.time.LocalDate;
 import javax.persistence.*;
 
 @Entity
@@ -19,8 +21,13 @@ public class Courses implements Serializable {
     @JoinColumn(name = "id_Career")
     private Career career;
 
-    @Temporal(TemporalType.DATE)
-    private Date start_date;
+    @Column(name="Fecha_Inscripcion")
+    private LocalDate start_date;
+
+
+    @Column(name="Fecha_Graduado")
+    @Nullable
+    private LocalDate finish_date;
 
     @Column(name="Graduado")
     private boolean graduated;
@@ -30,15 +37,30 @@ public class Courses implements Serializable {
     public Courses(Student student, Career career) {
         this.student = student;
         this.career = career;
-        this.start_date = new Date();
+        this.start_date = LocalDate.now();
+        this.finish_date = null;
         this.graduated = false;
+    }
+
+    public Courses(Student student, Career career, LocalDate start_date) {
+        this.student = student;
+        this.career = career;
+        this.start_date = start_date;
+    }
+
+    public Courses(Student student, Career career, LocalDate start_date, LocalDate finish_date) {
+        this.student = student;
+        this.career = career;
+        this.start_date = start_date;
+        this.finish_date = finish_date;
+        this.graduated = true;
     }
 
     public Career getCareer() {
         return career;
     }
 
-    public Date getStart_date() {
+    public LocalDate getStart_date() {
         return start_date;
     }
 
@@ -50,6 +72,10 @@ public class Courses implements Serializable {
         return student;
     }
 
+    public void setGraduated() {
+        this.finish_date = LocalDate.now();
+        this.graduated = true;
+    }
 
     @Override
     public String toString() {
@@ -57,6 +83,7 @@ public class Courses implements Serializable {
                 "student=" + student +
                 ", career=" + career +
                 ", start_date=" + start_date +
+                ", finish_date=" + finish_date +
                 ", graduated=" + graduated +
                 '}';
     }

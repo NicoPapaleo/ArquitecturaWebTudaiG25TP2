@@ -4,7 +4,7 @@ services:
     image: mysql
     environment:
       MYSQL_ROOT_PASSWORD: rootpassword
-      MYSQL_DATABASE: dbArquiTpG25
+      MYSQL_DATABASE: Integrador2
       MYSQL_USER: user
       MYSQL_PASSWORD: password
     ports:

@@ -13,7 +13,7 @@ import javax.persistence.*;
 @NamedQuery(name= Student.BUSCAR_TODOS, query=" SELECT s FROM  Student s")
 @NamedQuery(name= Student.BUSCAR_POR_GENERO, query="SELECT new dto.StudentDTO(s.dni, s.idLibreta, s.name, s.lastName, s.gender, s.city.name, s.years) FROM Student s WHERE s.gender = :gender")
 @NamedQuery(name= Student.BUSCAR_TODOS_ORDENADOS, query=" SELECT new dto.StudentDTO(s.dni,s.idLibreta,s.name,s.lastName,s.gender,s.city.name,s.years) FROM Student s ORDER BY s.lastName")
-@NamedQuery(name= Student.EXIST_STUDENT, query=" SELECT count(s) FROM Student s WHERE s.dni = :id")
+@NamedQuery(name= Student.EXIST_STUDENT, query=" SELECT 1 FROM Student s WHERE s.dni = :id")
 @NamedQuery(name= Student.BUSCAR_POR_CARRERA, query= "SELECT s FROM Student s JOIN s.courses c JOIN c.career ca WHERE ca.name = :careerName AND s.city.name = :cityName")
 
 public class Student {
@@ -24,6 +24,7 @@ public class Student {
     public static final String BUSCAR_TODOS_ORDENADOS = "Student.BUSCAR_TODOS_ORDENADOS";
     public static final String EXIST_STUDENT = "Student.EXIST_STUDENT";
     public static final String BUSCAR_POR_CARRERA = "Student.BUSCAR_POR_CARRERA";
+
     @Id
     @Column(name="DNI")
     private int dni;
@@ -45,7 +46,6 @@ public class Student {
 
     @ManyToOne
     private City city;
-    //cambiar a lazy
     @OneToMany(mappedBy = "student", fetch = FetchType.LAZY)
     private List<Courses> courses;  // muestro todas las carreras que cursa el estudiante
 

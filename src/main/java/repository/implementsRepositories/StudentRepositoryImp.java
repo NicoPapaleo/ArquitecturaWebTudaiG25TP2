@@ -35,7 +35,7 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<Student>ls=new ArrayList<>();
         try{
-            Query query = em.createQuery(Student.BUSCAR_TODOS);
+            Query query = em.createNamedQuery(Student.BUSCAR_TODOS);
             ls = query.getResultList();
         }catch(Exception e){
             throw new RuntimeException("Error en la consulta"+e);
@@ -110,22 +110,21 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
     public List<StudentDTO> getStudentsByCareerFilterByCity(String careerName ,String cityName){
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<Student>listResult = new ArrayList<>();
+        List<StudentDTO>studentDTOlist=new ArrayList<>();
         try{
             listResult=(List<Student>) em.createNamedQuery(Student.BUSCAR_POR_CARRERA)
-                    .setParameter("careerName",careerName)
-                    .setParameter("cityName",cityName)
-                    .getResultList();
+                                         .setParameter("careerName",careerName)
+                                         .setParameter("cityName",cityName)
+                                         .getResultList();
         }catch (NoResultException e){
             System.out.println("No existen en la ciudad ingresada");
         }
         finally{
             em.close();
         }
-        List<StudentDTO>studentDTOlist=new ArrayList<>();
-        for (Student s : listResult){
-            studentDTOlist.add(new StudentDTO(s.getDni(),s.getIdLibreta(),s.getName(),
-                    s.getLastName(),s.getGender(),s.getCity().getName(),s.getYears()));
-        }
+       listResult.forEach(s -> { studentDTOlist.add(new StudentDTO(s.getDni(),s.getIdLibreta(),s.getName(),
+                                                                   s.getLastName(),s.getGender(),s.getCity().getName(),
+                                                                   s.getYears()));});
         return studentDTOlist;
     }
 

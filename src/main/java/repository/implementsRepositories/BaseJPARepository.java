@@ -9,12 +9,12 @@ import java.util.List;
 
 public abstract class BaseJPARepository<Entity,ID extends Serializable> implements Repository<Entity, ID> {
     private EntityManager em;
-    private Class<Entity>entityClass;
-    //private Class<ID>idClass;
+    private Class<Entity> entityClass;
+    private Class<ID> idClass;
 
     public BaseJPARepository(Class<Entity>entityClass, Class<ID> idClass){
-        this.entityClass=entityClass;
-
+        this.entityClass = entityClass;
+        this.idClass = idClass;
     }
 
     @Override
@@ -22,7 +22,6 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
         Entity entity=null;
         em = EntityManagerHelper.getEntityManager();
         try{
-            System.out.print("estoy dentro del try");
             entity=em.find(entityClass,id);
         }
         catch(Exception e){
@@ -38,7 +37,6 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
     public void persist(Entity entity) {
         em=EntityManagerHelper.getEntityManager();
         try{
-            System.out.print("estoy dentro del try");
             em.getTransaction().begin();
             em.persist(entity);
             em.getTransaction().commit();
