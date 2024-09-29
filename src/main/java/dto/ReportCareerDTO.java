@@ -1,21 +1,30 @@
 package dto;
 
+import entity.Student;
+
+import java.util.List;
+
+//clase utilizada para devolver la informacion del registro ejercicio 3
 public class ReportCareerDTO {
 
     private String careerName;  // Nombre de la carrera
-    private int year;           // Año de inscripción o egreso
+    private int year;           // Anio de inscripción o egreso
     private long enrolled;      // Cantidad de estudiantes inscritos
     private long graduated;     // Cantidad de estudiantes graduados
+    private String name;
+    private String lastName;
+    private int dni;
 
-    // Constructor
-    public ReportCareerDTO(String careerName, int year, long enrolled, long graduated) {
+    public ReportCareerDTO(String careerName, int year, long enrolled, long graduated,String name, String lastName, int dni) {
         this.careerName = careerName;
         this.year = year;
         this.enrolled = enrolled;
         this.graduated = graduated;
+        this.name=name;
+        this.lastName=lastName;
+        this.dni=dni;
     }
 
-    // Getters y Setters
     public String getCareerName() {
         return careerName;
     }
@@ -55,6 +64,9 @@ public class ReportCareerDTO {
                 ", year=" + year +
                 ", enrolled=" + enrolled +
                 ", graduated=" + graduated +
+                ", name='" + name + '\'' +
+                ", lastName='" + lastName + '\'' +
+                ", dni=" + dni +
                 '}';
     }
 }

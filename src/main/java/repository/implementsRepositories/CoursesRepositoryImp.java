@@ -10,6 +10,8 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+//Clase singleton
+
 public class CoursesRepositoryImp extends BaseJPARepository<Courses, Integer> {
     private static CoursesRepositoryImp coursesRepositoryImp;
     public CoursesRepositoryImp() {

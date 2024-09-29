@@ -8,6 +8,8 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+//Clase singleton
+
 public class CityRepositoryImp extends BaseJPARepository<City, Integer> {
 
     private static CityRepositoryImp cityRepository;

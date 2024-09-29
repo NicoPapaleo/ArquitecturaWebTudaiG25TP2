@@ -2,6 +2,8 @@ package repository.implementsRepositories;
 
 import repository.interfaceRepository.RepositoryFactory;
 
+//Factory JPA devuelve la unica instancia de cada implementacion de repositorios utilizados
+
 public class JPARepositoryFactory implements RepositoryFactory {
 
     @Override

@@ -10,6 +10,8 @@ import javax.persistence.TypedQuery;
 import java.util.ArrayList;
 import java.util.List;
 
+//Clase singleton
+
 public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
     
     private static CareerRepositoryImp carrerRepositoryImp;
@@ -41,10 +43,6 @@ public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
         return ls;
     }
 
-    /**
-     * @brief busca las carreras con estudiantes inscriptos ordenados por cantidad
-     * @return retorna una lista de carreras ordenada por cantidad
-     */
     public List<CareerDTO> findByEnrolledStudentsOrderedByCant() {
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<CareerDTO> careerDTOlist =new ArrayList<>();
@@ -61,7 +59,6 @@ public class CareerRepositoryImp extends BaseJPARepository<Career, Integer> {
 
         return careerDTOlist;
     }
-
 
     public List<ReportCareerDTO> generateCareerReport() {
 

@@ -13,15 +13,19 @@ import java.io.IOException;
 import java.time.LocalDate;
 import java.util.Date;
 
+//Crea JPARepositoryFactory con repositorios de cada entidad para leer CSV y persistirlos
+
 public class CSVReader {
 
     private RepositoryFactory repositoryFactoryJPA;
     private static final String PATH = "src/main/java/csvFile/";
 
+    //creacion de JPARepository
     public CSVReader(){
         repositoryFactoryJPA = new JPARepositoryFactory();
     }
 
+    //lee archivos y los agrega a la base
     public void readFileStudent() {
         CityRepositoryImp cityRepository = repositoryFactoryJPA.getCityRepository();
         StudentRepositoryImp studentRepository = repositoryFactoryJPA.getStudentRepository();

@@ -7,11 +7,16 @@ import java.util.List;
 @Entity
 @NamedQuery(name= Career.BUSCAR_TODAS, query=" SELECT c FROM  Career c")
 @NamedQuery(name= Career.EXIST_CAREER, query=" SELECT 1 FROM  Career c WHERE idCareer = :idCareer")
-@NamedQuery(name=Career.GENERAR_REPORTE, query ="SELECT new dto.ReportCareerDTO(c.name, YEAR(cs.start_date), " +
-        "COUNT(cs.student), SUM(CASE WHEN cs.graduated = true THEN 1 ELSE 0 END)) " +
-        "FROM Career c JOIN c.students cs " +  // 'students' es el mapeo hacia Courses
-        "GROUP BY c.name, YEAR(cs.start_date) " +
-        "ORDER BY c.name, YEAR(cs.start_date) desc")
+@NamedQuery(
+        name = Career.GENERAR_REPORTE,
+        query = "SELECT new dto.ReportCareerDTO(c.name, YEAR(cs.start_date), COUNT(cs.student), " +
+                "SUM(CASE WHEN cs.graduated = true THEN 1 ELSE 0 END), " +
+                "s.name, s.lastName, s.dni) " +  // Seleccionamos los campos del estudiante
+                "FROM Career c JOIN c.students cs " +
+                "JOIN cs.student s " +
+                "GROUP BY c.name, YEAR(cs.start_date), s.name, s.lastName, s.dni " +
+                "ORDER BY c.name, YEAR(cs.start_date) desc"
+)
 @NamedQuery(name= Career.BUSCAR_CARRERAS_POR_ESTUDIANTES_INSCRIPTOS, query="SELECT new dto.CareerDTO(c.id, c.name,COUNT(s)) FROM Career c JOIN c.students s GROUP BY c.id, c.name HAVING COUNT(s)>0 ORDER BY COUNT(s) DESC")
 
 public class Career {

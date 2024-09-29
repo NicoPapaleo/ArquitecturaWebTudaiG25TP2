@@ -4,6 +4,8 @@ import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
+//crea/cierra el entity manager factory(singleton) y devuelve las entity managers
+
 public class EntityManagerHelper {
 
     private static EntityManagerFactory emf;

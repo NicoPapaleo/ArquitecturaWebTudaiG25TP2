@@ -10,6 +10,8 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
+//Clase singleton
+
 public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
 
     private static StudentRepositoryImp studentRepositoryImp;
@@ -26,10 +28,6 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
     }
 
 
-    /**
-     * @Brief Solicitar lista de todos los estudiantes.
-     * @return Lista de estudiantes de tipo List.
-     */
     @Override
     public List<Student> findAll() {
         EntityManager em = EntityManagerHelper.getEntityManager();
@@ -46,10 +44,7 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         return ls;
     }
 
-    /**
-     * @brief Esttudiantes ordenados por apellido
-     * @return List de tipo EstudiantesDTO ordenada por apellido
-     */
+
     public List<StudentDTO> findAllStudentsOrderedByLastName() {
         EntityManager em = EntityManagerHelper.getEntityManager();
         List<StudentDTO>studentDTOlist=new ArrayList<>();
@@ -63,12 +58,6 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         }
         return studentDTOlist;
     }
-
-    /**
-     * @brief busca estudiantes por genero
-     * @param gender es un caracter indicando el genero del estudiante
-     * @return retorna una lista de estudiantes
-     */
 
     public List<StudentDTO> findStudentsByGender(char gender) {
         EntityManager em = EntityManagerHelper.getEntityManager();
@@ -86,11 +75,6 @@ public class StudentRepositoryImp extends BaseJPARepository<Student, Integer> {
         return ls;
     }
 
-    /**
-     * @brief d) recuperar un estudiante, en base a su número de libreta universitaria.
-     * @param idLibreta Numero de libreta del estudiante a solicitar.
-     * @return Retorna un DTO de Estudiante.
-     */
     public StudentDTO studentByRecord(int idLibreta){
         EntityManager em = EntityManagerHelper.getEntityManager();
         Student result = null;

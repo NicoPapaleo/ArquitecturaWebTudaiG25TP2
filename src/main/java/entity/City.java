@@ -2,6 +2,7 @@ package entity;
 
 import javax.persistence.*;
 
+
 @Entity
 @NamedQuery(name= City.BUSCAR_TODAS, query=" SELECT c FROM  City c")
 public class City {
@@ -9,7 +10,6 @@ public class City {
     public static final String BUSCAR_TODAS = "City.BUSCAR_TODAS";
 
     @Id
-    //@GeneratedValue(strategy= GenerationType.AUTO)
     private int idCity;
 
     @Column

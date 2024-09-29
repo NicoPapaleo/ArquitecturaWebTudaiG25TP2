@@ -7,7 +7,10 @@ import javax.persistence.EntityManager;
 import java.io.Serializable;
 import java.util.List;
 
+//implementa metodos de Repository CRUD para cada repositorio que extienda
+
 public abstract class BaseJPARepository<Entity,ID extends Serializable> implements Repository<Entity, ID> {
+
     private EntityManager em;
     private Class<Entity> entityClass;
     private Class<ID> idClass;
@@ -17,6 +20,7 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
         this.idClass = idClass;
     }
 
+    //select
     @Override
     public Entity findById(ID id) {
         Entity entity=null;
@@ -25,7 +29,7 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
             entity=em.find(entityClass,id);
         }
         catch(Exception e){
-            throw new RuntimeException("Error al buscar el id"+id+e);
+            throw new RuntimeException("Error al buscar el id: "+id+"Error: "+e);
         }
         finally{
             em.close();
@@ -33,6 +37,7 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
         return entity;
     }
 
+    //insert
     @Override
     public void persist(Entity entity) {
         em=EntityManagerHelper.getEntityManager();
@@ -47,6 +52,7 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
         }
     }
 
+    //delete
     @Override
     public void delete(Entity entity) {
         em=EntityManagerHelper.getEntityManager();
@@ -64,7 +70,7 @@ public abstract class BaseJPARepository<Entity,ID extends Serializable> implemen
             em.close();
         }
     }
-
+    
     @Override
     public abstract List<Entity> findAll();
 

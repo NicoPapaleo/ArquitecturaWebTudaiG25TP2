@@ -6,12 +6,16 @@ import java.io.Serializable;
 import java.time.LocalDate;
 import javax.persistence.*;
 
+/*Es una clase que se le atribuye la relacion entre Career y Student.
+al tener 2 atributos adicionales, la hace una nueva entidad.*/
+
 @Entity
 @NamedQuery(name= Courses.BUSCAR_TODO, query=" SELECT c FROM  Courses c")
 public class Courses implements Serializable {
 
     public static final String BUSCAR_TODO = "Courses.BUSCAR_TODO";
 
+    //clave compuesta
     @Id
     @ManyToOne
     @JoinColumn(name = "id_Student")
@@ -23,7 +27,6 @@ public class Courses implements Serializable {
 
     @Column(name="Fecha_Inscripcion")
     private LocalDate start_date;
-
 
     @Column(name="Fecha_Graduado")
     @Nullable

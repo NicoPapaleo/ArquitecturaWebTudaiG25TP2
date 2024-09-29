@@ -10,6 +10,12 @@ public class StudentDTO {
     private String city;
     private int years;
 
+    public StudentDTO(int dni, int idLibreta, String name, String lastName){
+        this.dni = dni;
+        this.idLibreta = idLibreta;
+        this.name = name;
+        this.lastName = lastName;
+    }
     public StudentDTO(int dni, int idLibreta, String name, String lastName, char gender, String city, int years) {
         this.dni = dni;
         this.idLibreta = idLibreta;
@@ -19,7 +25,6 @@ public class StudentDTO {
         this.city = city;
         this.years = years;
     }
-
 
 
     public int getDni() {

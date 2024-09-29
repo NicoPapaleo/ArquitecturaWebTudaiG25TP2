@@ -30,20 +30,20 @@ public class App
         InitializeJPA in = new InitializeJPA(repositoryFactoryJPA);
 
         // Cargar y llenar base de datos
-        InitializeJPA.loadDataBase();
+        //InitializeJPA.loadDataBase();
 
         // a) Dar de alta un nuevo estudiante
-        City cityStudent = cityRepository.findById(2);
-        Student newStudent = new Student(18529742,52,"juan","Foschino",45,'M',cityStudent);
-        InitializeJPA.addStudent(newStudent);
+        //City cityStudent = cityRepository.findById(2);
+        //Student newStudent = new Student(18529742,52,"juan","Foschino",45,'M',cityStudent);
+        //InitializeJPA.addStudent(newStudent);
 
-        // b) Matricular un estudiante a una carrera nuevo
-        Career career = careerRepository.findById(3);
-        coursesRepository.enrollStudent(newStudent,career);
+        // b) Matricular un estudiante nuevo a una carrera
+        //Career career = careerRepository.findById(3);
+        //InitializeJPA.enrollStudent(newStudent,career);
 
         // b) Matricular un estudiante a una carrera ya existente
-        Student existentStudent = studentRepository.findById(9653211);
-        coursesRepository.enrollStudent(existentStudent,career);
+        //Student existentStudent = studentRepository.findById(9653211);
+        //coursesRepository.enrollStudent(existentStudent,career);
 
         // c) Recuperar todos los estudiantes, y especificar algún criterio de ordenamiento simple
         InitializeJPA.studentsOrderedByLastName();

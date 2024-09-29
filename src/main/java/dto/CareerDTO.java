@@ -1,6 +1,7 @@
 package dto;
 
 public class CareerDTO {
+
     private int idCareer;
     private String name;
     private long cantEstudiantes;
