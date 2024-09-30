@@ -7,6 +7,7 @@ Este proyecto es una aplicación basada en Java que utiliza JPA con Hibernate pa
 ### Diagrama Entidad-Relacion
 ![DER](https://github.com/user-attachments/assets/23263b71-cfbf-4649-ae15-d133ee5b8984)
 
+### Archivo raiz
 ![img.png](img.png)
 
 ### Patrón Repository y Factory
