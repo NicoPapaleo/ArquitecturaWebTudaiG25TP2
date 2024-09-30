@@ -41,7 +41,7 @@ public class InitializeJPA {
             StudentRepositoryImp studentRepository = repositoryFactoryJPA.getStudentRepository();
             studentRepository.persist(student);
         } catch (Exception e) {
-            System.out.print("No se puede dar de alta el estudiante");
+            System.out.println("No se puede dar de alta el estudiante");
         }
     }
     //b) matricular un estudiante en una carrera
