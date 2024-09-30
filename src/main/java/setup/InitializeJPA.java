@@ -71,7 +71,7 @@ public class InitializeJPA {
         StudentRepositoryImp studentRepository = repositoryFactoryJPA.getStudentRepository();
         if(Character.toUpperCase(gender) == 'M' || Character.toUpperCase(gender) == 'F'){
             List<StudentDTO>studentsFilterByGender = studentRepository.findStudentsByGender(gender);
-            System.out.println("lista de estudiantes filtrada por genero");
+            System.out.println("lista de estudiantes filtrada por genero (F=femenino/M=masculino) "+gender);
             studentsFilterByGender.forEach(studentDTO -> System.out.println(studentDTO.toString()));
         }else {
             System.out.println("Genero invalido");

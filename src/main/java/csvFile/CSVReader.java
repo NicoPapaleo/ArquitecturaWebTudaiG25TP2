@@ -18,7 +18,7 @@ import java.util.Date;
 public class CSVReader {
 
     private RepositoryFactory repositoryFactoryJPA;
-    private static final String PATH = "src/main/java/csvFile/";
+    private static final String PATH = "src/main/resources/";
 
     //creacion de JPARepository
     public CSVReader(){
